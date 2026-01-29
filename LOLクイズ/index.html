@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="リーグオブレジェンドのクイズゲーム - あなたのLoL知識をテストしよう！">
+    <title>LoL Quiz - リーグオブレジェンド クイズゲーム</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- パーティクル背景 -->
+    <div class="particles" id="particles"></div>
+
+    <!-- タイトル画面 -->
+    <section id="title-screen" class="screen active">
+        <div class="title-container">
+            <div class="logo-glow"></div>
+            <h1 class="game-title">
+                <span class="title-lol">LoL</span>
+                <span class="title-quiz">QUIZ</span>
+            </h1>
+            <p class="tagline">あなたのサモナー知識をテストせよ</p>
+            <button class="btn btn-primary btn-glow" id="start-btn">
+                <span class="btn-text">ゲームスタート</span>
+                <span class="btn-shine"></span>
+            </button>
+        </div>
+    </section>
+
+    <!-- 難易度選択画面 -->
+    <section id="difficulty-screen" class="screen">
+        <div class="screen-container">
+            <h2 class="screen-title">難易度を選択</h2>
+            <div class="difficulty-cards">
+                <div class="difficulty-card beginner" data-difficulty="beginner">
+                    <div class="card-glow"></div>
+                    <div class="card-icon">
+                        <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-iron.png"
+                            alt="Iron Emblem">
+                    </div>
+                    <h3>ビギナー</h3>
+                    <p>サモナーズリフトへようこそ</p>
+                    <ul class="card-stats">
+                        <li><span class="stat-label">制限時間</span><span class="stat-value">90秒</span></li>
+                        <li><span class="stat-label">問題数</span><span class="stat-value">10問</span></li>
+                    </ul>
+                </div>
+                <div class="difficulty-card standard" data-difficulty="standard">
+                    <div class="card-glow"></div>
+                    <div class="card-icon">
+                        <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-gold.png"
+                            alt="Gold Emblem">
+                    </div>
+                    <h3>スタンダード</h3>
+                    <p>Hextech研究所の試練</p>
+                    <ul class="card-stats">
+                        <li><span class="stat-label">制限時間</span><span class="stat-value">60秒</span></li>
+                        <li><span class="stat-label">問題数</span><span class="stat-value">15問</span></li>
+                    </ul>
+                </div>
+                <div class="difficulty-card pro" data-difficulty="pro">
+                    <div class="card-glow"></div>
+                    <div class="card-icon">
+                        <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png"
+                            alt="Challenger Emblem">
+                    </div>
+                    <h3>プロ</h3>
+                    <p>虚空の深淵への挑戦</p>
+                    <ul class="card-stats">
+                        <li><span class="stat-label">制限時間</span><span class="stat-value">30秒</span></li>
+                        <li><span class="stat-label">問題数</span><span class="stat-value">20問</span></li>
+                    </ul>
+                </div>
+            </div>
+            <button class="btn btn-secondary" id="back-to-title">タイトルに戻る</button>
+        </div>
+    </section>
+
+    <!-- クイズプレイ画面 -->
+    <section id="quiz-screen" class="screen">
+        <div class="quiz-container">
+            <!-- ヘッダー部分 -->
+            <div class="quiz-header">
+                <div class="timer-container">
+                    <div class="timer-icon">⏱️</div>
+                    <div class="timer-display" id="timer">90</div>
+                    <div class="timer-label">秒</div>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-ring">
+                        <svg class="progress-svg" viewBox="0 0 100 100">
+                            <circle class="progress-bg" cx="50" cy="50" r="45" />
+                            <circle class="progress-bar" cx="50" cy="50" r="45" id="progress-circle" />
+                        </svg>
+                        <div class="progress-text" id="progress-text">1/10</div>
+                    </div>
+                </div>
+                <div class="lives-container">
+                    <div class="lives-label">ライフ</div>
+                    <div class="lives-display" id="lives">
+                        <span class="life active">❤️</span>
+                        <span class="life active">❤️</span>
+                        <span class="life active">❤️</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 問題エリア -->
+            <div class="question-area">
+                <div class="question-frame">
+                    <div class="question-category" id="question-category">チャンピオン</div>
+                    <div class="question-image-container" id="question-image-container">
+                        <!-- チャンピオン画像などがここに表示される -->
+                    </div>
+                    <p class="question-text" id="question-text">この問題文がここに表示されます</p>
+                </div>
+            </div>
+
+            <!-- 選択肢エリア -->
+            <div class="answers-area">
+                <div class="answers-grid" id="answers-grid">
+                    <button class="answer-btn" data-index="0">
+                        <span class="answer-letter">A</span>
+                        <span class="answer-text">選択肢1</span>
+                    </button>
+                    <button class="answer-btn" data-index="1">
+                        <span class="answer-letter">B</span>
+                        <span class="answer-text">選択肢2</span>
+                    </button>
+                    <button class="answer-btn" data-index="2">
+                        <span class="answer-letter">C</span>
+                        <span class="answer-text">選択肢3</span>
+                    </button>
+                    <button class="answer-btn" data-index="3">
+                        <span class="answer-letter">D</span>
+                        <span class="answer-text">選択肢4</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 正答カウンター -->
+            <div class="score-display">
+                <span class="score-label">正解数</span>
+                <span class="score-value" id="correct-count">0</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 結果画面 -->
+    <section id="result-screen" class="screen">
+        <div class="result-container">
+            <div class="result-frame">
+                <h2 class="result-title" id="result-title">クイズ完了！</h2>
+                <div class="result-stats">
+                    <div class="result-score">
+                        <span class="score-big" id="final-score">0</span>
+                        <span class="score-total">/ <span id="total-questions">10</span></span>
+                    </div>
+                    <p class="result-message" id="result-message">素晴らしい！</p>
+                    <div class="result-details">
+                        <div class="detail-item">
+                            <span class="detail-label">難易度</span>
+                            <span class="detail-value" id="result-difficulty">ビギナー</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">正解率</span>
+                            <span class="detail-value" id="result-accuracy">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ニックネーム入力 -->
+                <div class="nickname-section">
+                    <label for="nickname-input" class="nickname-label">ニックネーム</label>
+                    <input type="text" id="nickname-input" class="nickname-input" placeholder="あなたの名前を入力"
+                        maxlength="20">
+                </div>
+
+                <!-- ボタンエリア -->
+                <div class="result-buttons">
+                    <button class="btn btn-twitter" id="tweet-btn">
+                        <svg class="twitter-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                        <span>結果をポスト</span>
+                    </button>
+                    <button class="btn btn-primary" id="retry-btn">もう一度挑戦</button>
+                    <button class="btn btn-secondary" id="home-btn">タイトルに戻る</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="questions.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

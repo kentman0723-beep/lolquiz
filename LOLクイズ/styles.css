@@ -1,0 +1,1186 @@
+/* ===================================
+   LoL Quiz - Hextech Design System
+   League of Legends Client Style
+   =================================== */
+
+/* CSS Variables - Theme System */
+:root {
+    /* LoL Client Colors */
+    --gold-1: #F0E6D2;
+    --gold-2: #C8AA6E;
+    --gold-3: #C89B3C;
+    --gold-4: #785A28;
+    --gold-5: #463714;
+    --gold-6: #32281E;
+
+    --blue-1: #CDFAFA;
+    --blue-2: #0AC8B9;
+    --blue-3: #0397AB;
+    --blue-4: #005A82;
+    --blue-5: #0A323C;
+    --blue-6: #091428;
+    --blue-7: #0A1428;
+
+    --grey-1: #A09B8C;
+    --grey-1-5: #5B5A56;
+    --grey-2: #3C3C41;
+    --grey-3: #1E2328;
+    --grey-cool: #1E282D;
+
+    --hextech-black: #010A13;
+    --hextech-magic: #0AC8B9;
+
+    /* Theme: Beginner (Summoner's Rift Dawn) */
+    --beginner-bg: linear-gradient(180deg, #0D1F17 0%, #091A13 50%, #051510 100%);
+    --beginner-accent: #1DB954;
+    --beginner-glow: rgba(29, 185, 84, 0.4);
+
+    /* Theme: Standard (Hextech Lab) */
+    --standard-bg: linear-gradient(180deg, #0A1428 0%, #091428 50%, #010A13 100%);
+    --standard-accent: #0AC8B9;
+    --standard-glow: rgba(10, 200, 185, 0.4);
+
+    /* Theme: Pro (Void/Ranked) */
+    --pro-bg: linear-gradient(180deg, #1A0A28 0%, #0D0618 50%, #05030A 100%);
+    --pro-accent: #C89B3C;
+    --pro-glow: rgba(200, 155, 60, 0.4);
+
+    /* Current Theme (default: standard) */
+    --current-bg: var(--standard-bg);
+    --current-accent: var(--standard-accent);
+    --current-glow: var(--standard-glow);
+
+    /* Typography */
+    --font-display: 'Beaufort for LOL', 'Cinzel', 'Orbitron', serif;
+    --font-body: 'Spiegel', 'Noto Sans JP', sans-serif;
+
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+
+    /* Border Radius */
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --radius-lg: 8px;
+
+    /* LoL Border Style */
+    --border-idle: 1px solid var(--gold-4);
+    --border-hover: 1px solid var(--gold-2);
+    --border-active: 2px solid var(--gold-3);
+}
+
+/* Theme Classes */
+body.theme-beginner {
+    --current-bg: var(--beginner-bg);
+    --current-accent: var(--beginner-accent);
+    --current-glow: var(--beginner-glow);
+}
+
+body.theme-standard {
+    --current-bg: var(--standard-bg);
+    --current-accent: var(--standard-accent);
+    --current-glow: var(--standard-glow);
+}
+
+body.theme-pro {
+    --current-bg: var(--pro-bg);
+    --current-accent: var(--pro-accent);
+    --current-glow: var(--pro-glow);
+}
+
+/* ===================================
+   Base Styles
+   =================================== */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--current-bg);
+    color: var(--gold-1);
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background 0.5s ease;
+    position: relative;
+}
+
+/* Background Pattern Overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(ellipse at 20% 80%, rgba(10, 200, 185, 0.03) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(200, 155, 60, 0.03) 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C8AA6E' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Particle Background */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--gold-2);
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: float 10s infinite ease-in-out;
+    box-shadow: 0 0 6px var(--gold-3);
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: translateY(-80px) translateX(15px);
+        opacity: 0.1;
+    }
+}
+
+/* ===================================
+   LoL-Style Decorative Elements
+   =================================== */
+.lol-border {
+    position: relative;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--grey-3), var(--grey-3)) padding-box,
+        linear-gradient(180deg, var(--gold-3) 0%, var(--gold-4) 50%, var(--gold-5) 100%) border-box;
+}
+
+.lol-border::before,
+.lol-border::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--gold-3);
+}
+
+.lol-border::before {
+    top: -4px;
+    left: -4px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.lol-border::after {
+    bottom: -4px;
+    right: -4px;
+    border-left: none;
+    border-top: none;
+}
+
+/* ===================================
+   Screen System
+   =================================== */
+.screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    z-index: 1;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ===================================
+   Title Screen
+   =================================== */
+.title-container {
+    text-align: center;
+    position: relative;
+}
+
+.logo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--gold-3) 0%, transparent 60%);
+    opacity: 0.15;
+    animation: pulse 4s infinite ease-in-out;
+    filter: blur(40px);
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.15;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 0.25;
+    }
+}
+
+.game-title {
+    font-family: var(--font-display);
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+    z-index: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.title-lol {
+    display: block;
+    color: var(--gold-2);
+    text-shadow:
+        0 0 30px rgba(200, 170, 110, 0.6),
+        0 2px 0 var(--gold-4);
+    font-size: 6rem;
+}
+
+.title-quiz {
+    display: block;
+    color: var(--hextech-magic);
+    text-shadow:
+        0 0 20px var(--hextech-magic),
+        0 0 40px rgba(10, 200, 185, 0.3);
+    font-size: 2.5rem;
+    letter-spacing: 0.8em;
+    margin-left: 0.4em;
+    margin-top: 0.5rem;
+}
+
+.tagline {
+    font-size: 1rem;
+    color: var(--grey-1);
+    margin-bottom: var(--spacing-2xl);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+/* ===================================
+   LoL-Style Buttons
+   =================================== */
+.btn {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: var(--spacing-md) var(--spacing-2xl);
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+
+.btn-primary {
+    background: linear-gradient(180deg, var(--gold-3) 0%, var(--gold-4) 100%);
+    color: var(--hextech-black);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(200, 155, 60, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(180deg, var(--gold-2) 0%, var(--gold-3) 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(200, 155, 60, 0.5);
+    transform: scale(1.02);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-secondary {
+    background: linear-gradient(180deg, var(--grey-2) 0%, var(--grey-3) 100%);
+    color: var(--grey-1);
+    border: 1px solid var(--gold-4);
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(180deg, var(--grey-1-5) 0%, var(--grey-2) 100%);
+    color: var(--gold-1);
+    border-color: var(--gold-3);
+}
+
+.btn-glow {
+    animation: btnGlow 3s infinite ease-in-out;
+}
+
+@keyframes btnGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(200, 155, 60, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(200, 155, 60, 0.6);
+    }
+}
+
+.btn-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shine 4s infinite;
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+
+    30%,
+    100% {
+        left: 150%;
+    }
+}
+
+.btn-twitter {
+    background: linear-gradient(180deg, #1a1a1a 0%, #000 100%);
+    color: #fff;
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.btn-twitter:hover {
+    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+    border-color: #555;
+}
+
+.twitter-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* ===================================
+   Difficulty Selection
+   =================================== */
+.screen-container {
+    text-align: center;
+    width: 100%;
+    max-width: 1100px;
+    padding: var(--spacing-xl);
+}
+
+.screen-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--gold-2);
+    margin-bottom: var(--spacing-2xl);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    position: relative;
+}
+
+.screen-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-3), transparent);
+}
+
+.difficulty-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.difficulty-card {
+    background: linear-gradient(180deg, rgba(30, 35, 40, 0.9) 0%, rgba(10, 20, 40, 0.95) 100%);
+    border: 2px solid var(--gold-5);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+}
+
+.difficulty-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold-4), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.difficulty-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold-4), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.difficulty-card:hover {
+    border-color: var(--gold-3);
+    transform: translateY(-5px);
+}
+
+.difficulty-card:hover::before,
+.difficulty-card:hover::after {
+    opacity: 1;
+}
+
+.difficulty-card.beginner:hover {
+    box-shadow: 0 10px 40px rgba(29, 185, 84, 0.2);
+    border-color: var(--beginner-accent);
+}
+
+.difficulty-card.standard:hover {
+    box-shadow: 0 10px 40px rgba(10, 200, 185, 0.2);
+    border-color: var(--standard-accent);
+}
+
+.difficulty-card.pro:hover {
+    box-shadow: 0 10px 40px rgba(200, 155, 60, 0.3);
+    border-color: var(--pro-accent);
+}
+
+.card-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, var(--current-glow) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.difficulty-card:hover .card-glow {
+    opacity: 0.15;
+}
+
+.card-icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(200, 170, 110, 0.4));
+}
+
+.difficulty-card.beginner .card-icon img {
+    filter: drop-shadow(0 0 15px var(--beginner-glow));
+}
+
+.difficulty-card.standard .card-icon img {
+    filter: drop-shadow(0 0 15px var(--standard-glow));
+}
+
+.difficulty-card.pro .card-icon img {
+    filter: drop-shadow(0 0 15px var(--pro-glow));
+}
+
+.difficulty-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--gold-2);
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.difficulty-card p {
+    color: var(--grey-1);
+    font-size: 0.85rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.card-stats {
+    list-style: none;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.3);
+    padding: var(--spacing-md);
+    border-left: 2px solid var(--gold-4);
+}
+
+.card-stats li {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-xs) 0;
+    font-size: 0.85rem;
+}
+
+.stat-label {
+    color: var(--grey-1);
+}
+
+.stat-value {
+    color: var(--gold-2);
+    font-weight: 700;
+}
+
+/* ===================================
+   Quiz Screen
+   =================================== */
+.quiz-container {
+    width: 100%;
+    max-width: 900px;
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: linear-gradient(180deg, rgba(30, 35, 40, 0.95) 0%, rgba(10, 20, 40, 0.98) 100%);
+    border: 1px solid var(--gold-5);
+    position: relative;
+}
+
+.quiz-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold-5), var(--gold-3), var(--gold-5));
+}
+
+/* Timer */
+.timer-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: rgba(0, 0, 0, 0.4);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--gold-5);
+}
+
+.timer-icon {
+    font-size: 1.2rem;
+}
+
+.timer-display {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--gold-2);
+    min-width: 50px;
+    text-align: center;
+}
+
+.timer-display.warning {
+    color: #E84057;
+    animation: timerPulse 0.5s infinite;
+}
+
+@keyframes timerPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.timer-label {
+    color: var(--grey-1);
+    font-size: 0.8rem;
+}
+
+/* Progress Ring */
+.progress-container {
+    position: relative;
+}
+
+.progress-ring {
+    position: relative;
+    width: 70px;
+    height: 70px;
+}
+
+.progress-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.progress-bg {
+    fill: none;
+    stroke: var(--gold-5);
+    stroke-width: 6;
+}
+
+.progress-bar {
+    fill: none;
+    stroke: var(--current-accent);
+    stroke-width: 6;
+    stroke-linecap: butt;
+    stroke-dasharray: 283;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.3s ease;
+    filter: drop-shadow(0 0 4px var(--current-glow));
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    color: var(--gold-1);
+    letter-spacing: 0.05em;
+}
+
+/* Lives */
+.lives-container {
+    text-align: right;
+    background: rgba(0, 0, 0, 0.4);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--gold-5);
+}
+
+.lives-label {
+    font-size: 0.7rem;
+    color: var(--grey-1);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2px;
+}
+
+.lives-display {
+    display: flex;
+    gap: var(--spacing-xs);
+    justify-content: flex-end;
+}
+
+.life {
+    font-size: 1.3rem;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 4px #E84057);
+}
+
+.life.lost {
+    opacity: 0.2;
+    filter: grayscale(1);
+    transform: scale(0.8);
+}
+
+/* Question Area */
+.question-area {
+    flex: 1;
+}
+
+.question-frame {
+    background: linear-gradient(180deg, rgba(30, 35, 40, 0.95) 0%, rgba(10, 20, 40, 0.98) 100%);
+    border: 2px solid var(--gold-5);
+    padding: var(--spacing-xl);
+    position: relative;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+
+.question-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--current-accent), transparent);
+}
+
+.question-category {
+    display: inline-block;
+    background: linear-gradient(180deg, var(--current-accent) 0%, rgba(10, 200, 185, 0.8) 100%);
+    color: var(--hextech-black);
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--spacing-lg);
+}
+
+.question-image-container {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto var(--spacing-lg);
+    border: 2px solid var(--gold-3);
+    overflow: hidden;
+    box-shadow:
+        0 0 20px var(--current-glow),
+        inset 0 0 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.question-image-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 1px solid var(--gold-4);
+    pointer-events: none;
+}
+
+.question-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.question-text {
+    font-size: 1.3rem;
+    line-height: 1.7;
+    text-align: center;
+    color: var(--gold-1);
+}
+
+/* Answers */
+.answers-area {
+    margin-top: auto;
+}
+
+.answers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+
+.answer-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: linear-gradient(180deg, rgba(30, 35, 40, 0.9) 0%, rgba(10, 20, 40, 0.95) 100%);
+    border: 1px solid var(--gold-5);
+    color: var(--gold-1);
+    font-size: 0.95rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+}
+
+.answer-btn::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--gold-4);
+    transition: all 0.2s ease;
+}
+
+.answer-btn:hover:not(:disabled) {
+    border-color: var(--gold-3);
+    background: linear-gradient(180deg, rgba(50, 55, 60, 0.9) 0%, rgba(20, 30, 50, 0.95) 100%);
+}
+
+.answer-btn:hover:not(:disabled)::before {
+    background: var(--current-accent);
+    box-shadow: 0 0 10px var(--current-glow);
+}
+
+.answer-btn:disabled {
+    cursor: not-allowed;
+}
+
+.answer-btn.correct {
+    border-color: #1DB954;
+    background: linear-gradient(180deg, rgba(29, 185, 84, 0.2) 0%, rgba(29, 185, 84, 0.1) 100%);
+}
+
+.answer-btn.correct::before {
+    background: #1DB954;
+    box-shadow: 0 0 10px rgba(29, 185, 84, 0.5);
+}
+
+.answer-btn.incorrect {
+    border-color: #E84057;
+    background: linear-gradient(180deg, rgba(232, 64, 87, 0.2) 0%, rgba(232, 64, 87, 0.1) 100%);
+}
+
+.answer-btn.incorrect::before {
+    background: #E84057;
+    box-shadow: 0 0 10px rgba(232, 64, 87, 0.5);
+}
+
+.answer-letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--gold-5);
+    color: var(--gold-2);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.answer-text {
+    flex: 1;
+}
+
+/* Score Display */
+.score-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--gold-5);
+}
+
+.score-label {
+    color: var(--grey-1);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.score-value {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--gold-2);
+}
+
+/* ===================================
+   Result Screen
+   =================================== */
+.result-container {
+    width: 100%;
+    max-width: 550px;
+    padding: var(--spacing-xl);
+}
+
+.result-frame {
+    background: linear-gradient(180deg, rgba(30, 35, 40, 0.95) 0%, rgba(10, 20, 40, 0.98) 100%);
+    border: 2px solid var(--gold-4);
+    padding: var(--spacing-2xl);
+    text-align: center;
+    position: relative;
+    clip-path: polygon(0 0, calc(100% - 25px) 0, 100% 25px, 100% 100%, 25px 100%, 0 calc(100% - 25px));
+}
+
+.result-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold-5), var(--gold-3), var(--gold-5));
+}
+
+.result-frame::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold-5), var(--gold-3), var(--gold-5));
+}
+
+.result-title {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--gold-2);
+    margin-bottom: var(--spacing-xl);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.result-stats {
+    margin-bottom: var(--spacing-xl);
+}
+
+.result-score {
+    margin-bottom: var(--spacing-lg);
+}
+
+.score-big {
+    font-family: var(--font-display);
+    font-size: 4.5rem;
+    color: var(--current-accent);
+    text-shadow: 0 0 30px var(--current-glow);
+}
+
+.score-total {
+    font-size: 1.8rem;
+    color: var(--grey-1);
+}
+
+.result-message {
+    font-size: 1.1rem;
+    color: var(--gold-2);
+    margin-bottom: var(--spacing-lg);
+}
+
+.result-details {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-2xl);
+    padding: var(--spacing-md);
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 2px solid var(--gold-4);
+    border-right: 2px solid var(--gold-4);
+}
+
+.detail-item {
+    text-align: center;
+}
+
+.detail-label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--grey-1);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--spacing-xs);
+}
+
+.detail-value {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--gold-2);
+}
+
+/* Nickname Section */
+.nickname-section {
+    margin-bottom: var(--spacing-xl);
+    text-align: left;
+}
+
+.nickname-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--grey-1);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--spacing-sm);
+}
+
+.nickname-input {
+    width: 100%;
+    padding: var(--spacing-md);
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--gold-5);
+    color: var(--gold-1);
+    font-size: 1rem;
+    font-family: var(--font-body);
+    transition: all 0.2s ease;
+}
+
+.nickname-input::placeholder {
+    color: var(--grey-1-5);
+}
+
+.nickname-input:focus {
+    outline: none;
+    border-color: var(--current-accent);
+    box-shadow: 0 0 15px var(--current-glow);
+}
+
+/* Result Buttons */
+.result-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+/* ===================================
+   Responsive Design
+   =================================== */
+@media (max-width: 900px) {
+    .difficulty-cards {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto var(--spacing-2xl);
+    }
+}
+
+@media (max-width: 768px) {
+    .game-title {
+        font-size: 3.5rem;
+    }
+
+    .title-lol {
+        font-size: 4rem;
+    }
+
+    .title-quiz {
+        font-size: 1.8rem;
+    }
+
+    .quiz-header {
+        flex-wrap: wrap;
+        gap: var(--spacing-md);
+    }
+
+    .answers-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .result-details {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .game-title {
+        font-size: 2.5rem;
+    }
+
+    .title-lol {
+        font-size: 3rem;
+    }
+
+    .title-quiz {
+        font-size: 1.3rem;
+    }
+
+    .screen-title {
+        font-size: 1.5rem;
+    }
+
+    .question-text {
+        font-size: 1.1rem;
+    }
+
+    .score-big {
+        font-size: 3.5rem;
+    }
+}
+
+/* ===================================
+   Animations
+   =================================== */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-8px);
+    }
+
+    75% {
+        transform: translateX(8px);
+    }
+}
+
+.shake {
+    animation: shake 0.4s ease-in-out;
+}
+
+.fade-in {
+    animation: slideIn 0.4s ease-out;
+}
