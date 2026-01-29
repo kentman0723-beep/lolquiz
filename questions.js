@@ -264,7 +264,7 @@ const QUESTIONS_DATABASE = {
             question: "魔法攻撃力（AP）を上げる基本アイテム「増魔の書」の値段は？",
             image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/1052.png",
             answers: ["350G", "400G", "435G", "500G"],
-            correct: 2
+            correct: 1
         },
         {
             category: "チャンピオン",

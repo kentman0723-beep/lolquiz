@@ -572,6 +572,12 @@ body::before {
     overflow: hidden;
     transition: all 0.3s ease;
     clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 500px;
 }
 
 .difficulty-card::before {

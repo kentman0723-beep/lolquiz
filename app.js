@@ -11,8 +11,8 @@ class SoundManager {
         this.audioContext = null;
         this.bgmAudio = null;
         this.isMuted = false;
-        this.bgmVolume = 0.3;
-        this.sfxVolume = 0.5;
+        this.bgmVolume = 0.1;
+        this.sfxVolume = 0.2;
 
         // BGM URL (フリー音源)
         this.bgmUrl = 'https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3';
