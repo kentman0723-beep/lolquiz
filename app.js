@@ -299,20 +299,53 @@ class LoLQuizGame {
         const sfxValue = document.getElementById('sfx-value');
         const muteBtn = document.getElementById('mute-btn');
 
+        // クイズ中の音量コントロール
+        const bgmSliderQuiz = document.getElementById('bgm-volume-quiz');
+        const sfxSliderQuiz = document.getElementById('sfx-volume-quiz');
+        const muteBtnQuiz = document.getElementById('mute-btn-quiz');
+
         bgmSlider.addEventListener('input', (e) => {
             const vol = e.target.value;
             bgmValue.textContent = vol + '%';
+            if (bgmSliderQuiz) bgmSliderQuiz.value = vol;
             this.sound.setBGMVolume(vol / 100);
         });
 
         sfxSlider.addEventListener('input', (e) => {
             const vol = e.target.value;
             sfxValue.textContent = vol + '%';
+            if (sfxSliderQuiz) sfxSliderQuiz.value = vol;
             this.sound.setSFXVolume(vol / 100);
         });
 
         muteBtn.addEventListener('click', () => {
             const isMuted = this.sound.toggleMute();
+            muteBtn.textContent = isMuted ? '🔇 サウンドOFF' : '🔊 サウンドON';
+            muteBtn.classList.toggle('muted', isMuted);
+            if (muteBtnQuiz) {
+                muteBtnQuiz.textContent = isMuted ? '🔇' : '🔊';
+                muteBtnQuiz.classList.toggle('muted', isMuted);
+            }
+        });
+
+        bgmSliderQuiz.addEventListener('input', (e) => {
+            const vol = e.target.value;
+            bgmValue.textContent = vol + '%';
+            bgmSlider.value = vol;
+            this.sound.setBGMVolume(vol / 100);
+        });
+
+        sfxSliderQuiz.addEventListener('input', (e) => {
+            const vol = e.target.value;
+            sfxValue.textContent = vol + '%';
+            sfxSlider.value = vol;
+            this.sound.setSFXVolume(vol / 100);
+        });
+
+        muteBtnQuiz.addEventListener('click', () => {
+            const isMuted = this.sound.toggleMute();
+            muteBtnQuiz.textContent = isMuted ? '🔇' : '🔊';
+            muteBtnQuiz.classList.toggle('muted', isMuted);
             muteBtn.textContent = isMuted ? '🔇 サウンドOFF' : '🔊 サウンドON';
             muteBtn.classList.toggle('muted', isMuted);
         });

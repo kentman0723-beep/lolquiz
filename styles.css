@@ -415,6 +415,31 @@ body::before {
     border-color: #555;
 }
 
+/* クイズ中の音量パネル */
+.volume-panel-quiz {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: var(--spacing-md);
+    max-width: 280px;
+    z-index: 1000;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.volume-panel-quiz:hover {
+    opacity: 1;
+}
+
+.volume-panel-quiz .volume-control {
+    margin-bottom: var(--spacing-sm);
+}
+
+.btn-mute-small {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    min-width: auto;
+}
+
 /* ===================================
    LoL-Style Buttons
    =================================== */
@@ -648,10 +673,11 @@ body::before {
 .card-icon {
     width: 360px;
     height: 360px;
-    margin: var(--spacing-xl) auto;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .card-icon img {
