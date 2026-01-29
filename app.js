@@ -3,6 +3,184 @@
  * ゲームの状態管理とインタラクション
  */
 
+/**
+ * サウンドマネージャー - BGMと効果音の管理
+ */
+class SoundManager {
+    constructor() {
+        this.audioContext = null;
+        this.bgmAudio = null;
+        this.isMuted = false;
+        this.bgmVolume = 0.3;
+        this.sfxVolume = 0.5;
+
+        // BGM URL (フリー音源)
+        this.bgmUrl = 'https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3';
+
+        this.init();
+    }
+
+    init() {
+        // AudioContextの初期化はユーザー操作後に行う
+        document.addEventListener('click', () => this.initAudioContext(), { once: true });
+    }
+
+    initAudioContext() {
+        if (this.audioContext) return;
+
+        try {
+            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            this.initBGM();
+        } catch (e) {
+            console.log('Web Audio API not supported');
+        }
+    }
+
+    initBGM() {
+        this.bgmAudio = new Audio(this.bgmUrl);
+        this.bgmAudio.loop = true;
+        this.bgmAudio.volume = this.bgmVolume;
+    }
+
+    // BGM再生
+    playBGM() {
+        if (this.bgmAudio && !this.isMuted) {
+            this.bgmAudio.play().catch(() => { });
+        }
+    }
+
+    // BGM停止
+    stopBGM() {
+        if (this.bgmAudio) {
+            this.bgmAudio.pause();
+            this.bgmAudio.currentTime = 0;
+        }
+    }
+
+    // BGM一時停止
+    pauseBGM() {
+        if (this.bgmAudio) {
+            this.bgmAudio.pause();
+        }
+    }
+
+    // 効果音を生成して再生（Web Audio API使用）
+    playSFX(type) {
+        if (!this.audioContext || this.isMuted) return;
+
+        const oscillator = this.audioContext.createOscillator();
+        const gainNode = this.audioContext.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(this.audioContext.destination);
+
+        const now = this.audioContext.currentTime;
+        gainNode.gain.setValueAtTime(this.sfxVolume, now);
+
+        switch (type) {
+            case 'correct':
+                // 正解音：上昇する明るい音
+                oscillator.frequency.setValueAtTime(523.25, now); // C5
+                oscillator.frequency.setValueAtTime(659.25, now + 0.1); // E5
+                oscillator.frequency.setValueAtTime(783.99, now + 0.2); // G5
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                oscillator.start(now);
+                oscillator.stop(now + 0.4);
+                break;
+
+            case 'incorrect':
+                // 不正解音：下降する暗い音
+                oscillator.frequency.setValueAtTime(293.66, now); // D4
+                oscillator.frequency.setValueAtTime(220, now + 0.15); // A3
+                oscillator.type = 'sawtooth';
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                oscillator.start(now);
+                oscillator.stop(now + 0.3);
+                break;
+
+            case 'click':
+                // クリック音
+                oscillator.frequency.setValueAtTime(800, now);
+                oscillator.type = 'sine';
+                gainNode.gain.setValueAtTime(0.2, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+                oscillator.start(now);
+                oscillator.stop(now + 0.05);
+                break;
+
+            case 'hover':
+                // ホバー音
+                oscillator.frequency.setValueAtTime(600, now);
+                oscillator.type = 'sine';
+                gainNode.gain.setValueAtTime(0.1, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.03);
+                oscillator.start(now);
+                oscillator.stop(now + 0.03);
+                break;
+
+            case 'gameOver':
+                // ゲームオーバー音
+                oscillator.frequency.setValueAtTime(440, now);
+                oscillator.frequency.exponentialRampToValueAtTime(110, now + 0.5);
+                oscillator.type = 'sawtooth';
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
+                oscillator.start(now);
+                oscillator.stop(now + 0.6);
+                break;
+
+            case 'victory':
+                // 勝利ファンファーレ
+                this.playVictoryFanfare();
+                return;
+
+            case 'timer':
+                // タイマー警告音
+                oscillator.frequency.setValueAtTime(880, now);
+                oscillator.type = 'square';
+                gainNode.gain.setValueAtTime(0.15, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                oscillator.start(now);
+                oscillator.stop(now + 0.1);
+                break;
+        }
+    }
+
+    // 勝利ファンファーレ（複数音）
+    playVictoryFanfare() {
+        if (!this.audioContext || this.isMuted) return;
+
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+        const now = this.audioContext.currentTime;
+
+        notes.forEach((freq, i) => {
+            const osc = this.audioContext.createOscillator();
+            const gain = this.audioContext.createGain();
+            osc.connect(gain);
+            gain.connect(this.audioContext.destination);
+
+            osc.frequency.setValueAtTime(freq, now + i * 0.15);
+            osc.type = 'sine';
+            gain.gain.setValueAtTime(0.3, now + i * 0.15);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.15 + 0.3);
+
+            osc.start(now + i * 0.15);
+            osc.stop(now + i * 0.15 + 0.3);
+        });
+    }
+
+    // ミュート切り替え
+    toggleMute() {
+        this.isMuted = !this.isMuted;
+        if (this.bgmAudio) {
+            this.bgmAudio.volume = this.isMuted ? 0 : this.bgmVolume;
+        }
+        return this.isMuted;
+    }
+}
+
+// グローバルサウンドマネージャー
+const soundManager = new SoundManager();
+
 class LoLQuizGame {
     constructor() {
         // ゲーム状態
@@ -49,6 +227,9 @@ class LoLQuizGame {
 
         // パーティクル生成
         this.createParticles();
+
+        // サウンドマネージャー参照
+        this.sound = soundManager;
     }
 
     /**
@@ -57,18 +238,21 @@ class LoLQuizGame {
     initEventListeners() {
         // タイトル画面
         document.getElementById('start-btn').addEventListener('click', () => {
+            this.sound.playSFX('click');
             this.showScreen('difficulty');
         });
 
         // 難易度選択
         document.querySelectorAll('.difficulty-card').forEach(card => {
             card.addEventListener('click', () => {
+                this.sound.playSFX('click');
                 const difficulty = card.dataset.difficulty;
                 this.startGame(difficulty);
             });
         });
 
         document.getElementById('back-to-title').addEventListener('click', () => {
+            this.sound.playSFX('click');
             this.showScreen('title');
         });
 
@@ -153,6 +337,7 @@ class LoLQuizGame {
 
         // 画面遷移してクイズ開始
         this.showScreen('quiz');
+        this.sound.playBGM();
         this.showQuestion();
         this.startTimer();
     }
@@ -228,10 +413,12 @@ class LoLQuizGame {
 
         if (selectedIndex === question.correct) {
             // 正解
+            this.sound.playSFX('correct');
             this.correctCount++;
             this.elements.correctCount.textContent = this.correctCount;
         } else {
             // 不正解
+            this.sound.playSFX('incorrect');
             answerBtns[selectedIndex].classList.add('incorrect');
             this.loseLife();
         }
@@ -308,6 +495,7 @@ class LoLQuizGame {
 
             if (this.timeLeft <= 10) {
                 this.elements.timer.classList.add('warning');
+                if (this.timeLeft > 0) this.sound.playSFX('timer');
             }
 
             if (this.timeLeft <= 0) {
@@ -339,6 +527,7 @@ class LoLQuizGame {
      */
     endGame(completed) {
         this.stopTimer();
+        this.sound.stopBGM();
 
         const config = QUIZ_CONFIG[this.difficulty];
         const total = this.questions.length;
@@ -353,10 +542,12 @@ class LoLQuizGame {
         // タイトルとメッセージ
         if (!completed && this.lives <= 0) {
             this.elements.resultTitle.textContent = 'ゲームオーバー';
+            this.sound.playSFX('gameOver');
         } else if (!completed) {
             this.elements.resultTitle.textContent = '時間切れ！';
         } else {
             this.elements.resultTitle.textContent = 'クイズ完了！';
+            this.sound.playSFX('victory');
         }
 
         this.elements.resultMessage.textContent = this.getResultMessage(accuracy);
