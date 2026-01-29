@@ -31,21 +31,6 @@
                 <span class="btn-text">ゲームスタート</span>
                 <span class="btn-shine"></span>
             </button>
-
-            <!-- 音量調節パネル -->
-            <div class="volume-panel">
-                <div class="volume-control">
-                    <label class="volume-label">🎵 BGM</label>
-                    <input type="range" id="bgm-volume" class="volume-slider" min="0" max="100" value="10">
-                    <span class="volume-value" id="bgm-value">10%</span>
-                </div>
-                <div class="volume-control">
-                    <label class="volume-label">🔊 効果音</label>
-                    <input type="range" id="sfx-volume" class="volume-slider" min="0" max="100" value="20">
-                    <span class="volume-value" id="sfx-value">20%</span>
-                </div>
-                <button class="btn btn-mute" id="mute-btn">🔊 サウンドON</button>
-            </div>
         </div>
     </section>
 
@@ -56,10 +41,7 @@
             <div class="difficulty-cards">
                 <div class="difficulty-card beginner" data-difficulty="beginner">
                     <div class="card-glow"></div>
-                    <div class="card-icon">
-                        <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-iron.png"
-                            alt="Iron Emblem">
-                    </div>
+                    <div class="card-icon">🌱</div>
                     <h3>ビギナー</h3>
                     <p>サモナーズリフトへようこそ</p>
                     <ul class="card-stats">
@@ -69,10 +51,7 @@
                 </div>
                 <div class="difficulty-card standard" data-difficulty="standard">
                     <div class="card-glow"></div>
-                    <div class="card-icon">
-                        <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-gold.png"
-                            alt="Gold Emblem">
-                    </div>
+                    <div class="card-icon">⚔️</div>
                     <h3>スタンダード</h3>
                     <p>Hextech研究所の試練</p>
                     <ul class="card-stats">
@@ -82,10 +61,7 @@
                 </div>
                 <div class="difficulty-card pro" data-difficulty="pro">
                     <div class="card-glow"></div>
-                    <div class="card-icon">
-                        <img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png"
-                            alt="Challenger Emblem">
-                    </div>
+                    <div class="card-icon">👑</div>
                     <h3>プロ</h3>
                     <p>虚空の深淵への挑戦</p>
                     <ul class="card-stats">
@@ -164,19 +140,6 @@
             <div class="score-display">
                 <span class="score-label">正解数</span>
                 <span class="score-value" id="correct-count">0</span>
-            </div>
-
-            <!-- 音量調節パネル（クイズ中） -->
-            <div class="volume-panel volume-panel-quiz">
-                <div class="volume-control">
-                    <label class="volume-label">🎵 BGM</label>
-                    <input type="range" id="bgm-volume-quiz" class="volume-slider" min="0" max="100" value="10">
-                </div>
-                <div class="volume-control">
-                    <label class="volume-label">🔊 効果音</label>
-                    <input type="range" id="sfx-volume-quiz" class="volume-slider" min="0" max="100" value="20">
-                </div>
-                <button class="btn btn-mute btn-mute-small" id="mute-btn-quiz">🔊</button>
             </div>
         </div>
     </section>
