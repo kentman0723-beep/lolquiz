@@ -1,54 +1,49 @@
 /**
  * LoL Quiz - Questions Database
- * チャンピオン、スキル、アイテムに関するクイズ問題
- * 総問題数: 150問
+ * ゲームメカニクス・オブジェクト・ゲームフロー重視
+ * 総問題数: 100問（各難易度約33問）
  */
 
 const QUESTIONS_DATABASE = {
-    // ビギナー向け問題（基本的な知識）- 50問
+    // ビギナー向け問題（基本的な知識）- 33問
     beginner: [
+        // === ゲームの基本 ===
         {
-            category: "チャンピオン",
-            question: "「デマーシアの力」と呼ばれる、光の剣を振るう騎士チャンピオンは誰？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Garen.png",
-            answers: ["ガレン", "ダリウス", "ジャーヴァンⅣ", "フィオラ"],
-            correct: 0
+            category: "ゲーム基本",
+            question: "試合に勝つための最終目標は何？",
+            image: null,
+            answers: ["バロンを倒す", "敵を100回キルする", "敵のネクサスを破壊する", "全タワーを破壊する"],
+            correct: 2
         },
         {
-            category: "チャンピオン",
-            question: "9本の尻尾を持つ、魅惑の力を使う女性チャンピオンは誰？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Ahri.png",
-            answers: ["ラックス", "アーリ", "ソナ", "イレリア"],
+            category: "ゲーム基本",
+            question: "ゲーム開始時に自動でもらえるゴールドは何G？",
+            image: null,
+            answers: ["400G", "450G", "500G", "550G"],
+            correct: 2
+        },
+        {
+            category: "ゲーム基本",
+            question: "ミニオンを倒してゴールドを得ることを何という？",
+            image: null,
+            answers: ["キル", "ファーム", "CS", "プッシュ"],
+            correct: 2
+        },
+        {
+            category: "ゲーム基本",
+            question: "サモナーズリフトにあるレーンは全部で何本？",
+            image: null,
+            answers: ["2本", "3本", "4本", "5本"],
             correct: 1
         },
         {
-            category: "チャンピオン",
-            question: "「ヨードルガンナー」とも呼ばれ、巨大な大砲「ブーマー」を持つヨードルチャンピオンは誰？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Tristana.png",
-            answers: ["ティーモ", "ルル", "トリスターナ", "ポッピー"],
-            correct: 2
-        },
-        {
-            category: "アイテム",
-            question: "攻撃力+10を提供する、350ゴールドで購入できる最も基本的な剣アイテムは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/1036.png",
-            answers: ["ロングソード", "ダガー", "ドランブレード", "ショートソード"],
-            correct: 0
-        },
-        {
-            category: "ゲーム知識",
-            question: "サモナーズリフトで、チームのネクサスを守る最後の防衛施設は何？",
+            category: "ゲーム基本",
+            question: "1チームは何人で構成される？",
             image: null,
-            answers: ["インヒビター", "タワー", "ネクサスタワー", "バロン"],
+            answers: ["3人", "4人", "5人", "6人"],
             correct: 2
         },
-        {
-            category: "チャンピオン",
-            question: "虚空から来た目玉のような姿をした、ビームを撃つチャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Velkoz.png",
-            answers: ["コグマウ", "マルザハール", "ヴェルコズ", "カサディン"],
-            correct: 2
-        },
+        // === ロール ===
         {
             category: "ロール",
             question: "ボットレーンでADCをサポートする役割は何と呼ばれる？",
@@ -57,1012 +52,693 @@ const QUESTIONS_DATABASE = {
             correct: 2
         },
         {
-            category: "チャンピオン",
-            question: "巨大な盾を持ち、味方を守る口ひげのサポートチャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Braum.png",
-            answers: ["タリック", "ブラウム", "レオナ", "アリスター"],
-            correct: 1
+            category: "ロール",
+            question: "サモナースペル「スマイト」を持つことが必須なポジションは？",
+            image: null,
+            answers: ["トップ", "ミッド", "ジャングル", "サポート"],
+            correct: 2
         },
         {
+            category: "ロール",
+            question: "ADCは何の略？",
+            image: null,
+            answers: ["Attack Damage Carry", "Ability Damage Champion", "Attack Defense Carry", "All Damage Champion"],
+            correct: 0
+        },
+        {
+            category: "ロール",
+            question: "マップの上側のレーンは何と呼ばれる？",
+            image: null,
+            answers: ["ボットレーン", "ミッドレーン", "トップレーン", "サイドレーン"],
+            correct: 2
+        },
+        // === オブジェクト基本 ===
+        {
             category: "オブジェクト",
-            question: "倒すとチーム全員にバフを与える、川にいる大きな紫色のモンスターは？",
+            question: "倒すとチーム全員に強力なバフを与える、川にいる大きな紫色のモンスターは？",
             image: null,
             answers: ["ドラゴン", "リフトヘラルド", "バロンナッシャー", "スカトル"],
             correct: 2
         },
         {
-            category: "チャンピオン",
-            question: "舌で敵を飲み込むことができる、巨大なナマズのようなチャンピオンは誰？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/TahmKench.png",
-            answers: ["チョガス", "タム・ケンチ", "コグマウ", "レクサイ"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "「疾風の剣士」と呼ばれ、風を操る剣士チャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Yasuo.png",
-            answers: ["ヤスオ", "ゼド", "タロン", "マスター・イー"],
-            correct: 0
-        },
-        {
-            category: "チャンピオン",
-            question: "2丁の拳銃を持つ、ビルジウォーター出身の女賞金稼ぎは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/MissFortune.png",
-            answers: ["ジンクス", "ミス・フォーチュン", "ケイトリン", "ヴェイン"],
-            correct: 1
-        },
-        {
-            category: "アイテム",
-            question: "体力を回復するポーションの名前は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/2003.png",
-            answers: ["マナポーション", "体力ポーション", "回復薬", "エリクサー"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "「盲目の僧」と呼ばれ、飛び蹴りが特徴的なチャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/LeeSin.png",
-            answers: ["シェン", "リー・シン", "アカリ", "ザック"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "モルガナと双子の姉妹である、翼を持つサポートチャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Kayle.png",
-            answers: ["ケイル", "ラカン", "ナミ", "ソラカ"],
-            correct: 0
-        },
-        {
-            category: "ゲーム知識",
-            question: "ゲーム開始時に自動でもらえるゴールドは何G？",
+            category: "オブジェクト",
+            question: "ドラゴンが出現するのはマップのどこ？",
             image: null,
-            answers: ["400G", "450G", "500G", "550G"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン",
-            question: "ピルトーヴァーの保安官で、ライフルを使う女性チャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Caitlyn.png",
-            answers: ["ヴァイ", "ケイトリン", "ジンクス", "カミール"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "氷の矢を放つフレヨルドの女王は誰？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Ashe.png",
-            answers: ["リサンドラ", "アッシュ", "セジュアニ", "アニビア"],
-            correct: 1
-        },
-        {
-            category: "アイテム",
-            question: "ワードを置くための基本的な黄色いアイテムは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3340.png",
-            answers: ["コントロールワード", "ステルスワード", "トリンケット", "オラクルレンズ"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン",
-            question: "巨大なハンマーを振り回すノクサスの処刑人は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Darius.png",
-            answers: ["ダリウス", "ドレイヴン", "サイオン", "スウェイン"],
-            correct: 0
-        },
-        {
-            category: "チャンピオン",
-            question: "かわいい見た目で毒キノコを設置するヨードルチャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Teemo.png",
-            answers: ["ティーモ", "ルル", "ハイマーディンガー", "コーキ"],
-            correct: 0
-        },
-        {
-            category: "ゲーム知識",
-            question: "ミニオンを倒してゴールドを得ることを何という？",
-            image: null,
-            answers: ["キル", "ファーム", "CS", "プッシュ"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン",
-            question: "「野生の怒り」と呼ばれ、斧を投げる戦士チャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Olaf.png",
-            answers: ["オラフ", "トランドル", "ボリベア", "ウディア"],
-            correct: 0
-        },
-        {
-            category: "チャンピオン",
-            question: "魔法陣で敵をスタンさせるメイジサポートは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Lux.png",
-            answers: ["ゼラス", "ラックス", "モルガナ", "ブランド"],
+            answers: ["トップ側の川", "ボット側の川", "ミッドレーン", "ジャングル内"],
             correct: 1
         },
         {
             category: "オブジェクト",
-            question: "5分ごとに出現する、倒すとゴールドと経験値をくれるエレメンタルモンスターは？",
+            question: "インヒビターを破壊すると何が出現する？",
             image: null,
-            answers: ["バロン", "ドラゴン", "リフトヘラルド", "グロンプ"],
+            answers: ["砲台ミニオン", "スーパーミニオン", "バロン", "リフトヘラルド"],
             correct: 1
         },
         {
-            category: "チャンピオン",
-            question: "クモに変身できるシャドウアイルのチャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Elise.png",
-            answers: ["エリス", "イブリン", "エコー", "イライ"],
-            correct: 0
+            category: "オブジェクト",
+            question: "ネクサスを守っているタワーは何本？",
+            image: null,
+            answers: ["1本", "2本", "3本", "4本"],
+            correct: 1
         },
         {
-            category: "チャンピオン",
-            question: "「星を鍛えし者」と呼ばれ、宇宙のドラゴンチャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/AurelionSol.png",
-            answers: ["シヴァーナ", "オレリオン・ソル", "シンドラ", "ベルベス"],
+            category: "オブジェクト",
+            question: "各レーンにあるタワーは全部で何本？",
+            image: null,
+            answers: ["2本", "3本", "4本", "5本"],
+            correct: 1
+        },
+        // === アイテム基本 ===
+        {
+            category: "アイテム",
+            question: "体力を回復する赤いポーションの名前は？",
+            image: null,
+            answers: ["マナポーション", "体力ポーション", "回復薬", "エリクサー"],
             correct: 1
         },
         {
             category: "アイテム",
-            question: "靴をアップグレードした、移動速度が最も上がるブーツは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3009.png",
-            answers: ["マーキュリーブーツ", "プレートスチールブーツ", "スイフトネスブーツ", "アイオニアブーツ"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン",
-            question: "影を操り、手裏剣を投げる忍者チャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Zed.png",
-            answers: ["シェン", "アカリ", "ゼド", "ケネン"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン",
-            question: "「不滅の義勇」と呼ばれ、盾を使うノクサスを憎む戦士は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Pantheon.png",
-            answers: ["パンテオン", "アトレウス", "レオナ", "ターゴン"],
-            correct: 0
-        },
-        {
-            category: "チャンピオン",
-            question: "ぬいぐるみの「ティバーズ」を召喚するチャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Annie.png",
-            answers: ["ゾーイ", "アニー", "ルル", "ポッピー"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "ガレンの妹である、光の魔法使いは誰？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Lux.png",
-            answers: ["ラックス", "フィオラ", "ケイル", "モルガナ"],
-            correct: 0
-        },
-        {
-            category: "チャンピオン",
-            question: "ナサスの弟で、復讐に燃えるワニの姿をしたチャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Renekton.png",
-            answers: ["アジール", "ゼラス", "レネクトン", "スカーナー"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン",
-            question: "ティーモの所属する部隊の役割は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Teemo.png",
-            answers: ["タンク", "スカウト", "メディック", "コマンダー"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "琴のような楽器「エトワール」を奏でるサポートチャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Sona.png",
-            answers: ["セラフィーン", "ソナ", "ナミ", "ジャンナ"],
-            correct: 1
-        },
-        {
-            category: "ゲーム知識",
-            question: "試合に勝つための最終目標は？",
+            question: "ワードを置くための無料トリンケットの色は？",
             image: null,
-            answers: ["バロンを倒す", "全敵チャンピオンを倒す", "敵のネクサスを破壊する", "100キルする"],
+            answers: ["赤", "青", "黄色", "緑"],
             correct: 2
         },
         {
             category: "アイテム",
-            question: "魔法攻撃力（AP）を上げる基本アイテム「増魔の書」の値段は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/1052.png",
-            answers: ["350G", "400G", "435G", "500G"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "カードを投げて戦うイカサマ師のチャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/TwistedFate.png",
-            answers: ["グレイブス", "ツイステッド・フェイト", "ジン", "シャコ"],
-            correct: 1
-        },
-        {
-            category: "ロール",
-            question: "サモナースペル「スマイト」を持つことが必須なポジションは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/spell/SummonerSmite.png",
-            answers: ["トップ", "ミッド", "ジャングル", "サポート"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン",
-            question: "熊のぬいぐるみのような姿だが、実は恐ろしい影の熊であるチャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Volibear.png",
-            answers: ["ボリベア", "ワーウィック", "ナー", "ケネン"],
-            correct: 0
-        },
-        {
-            category: "チャンピオン",
-            question: "時を操る老人チャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Zilean.png",
-            answers: ["ライズ", "ジリアン", "ハイマーディンガー", "コーキ"],
-            correct: 1
-        },
-        {
-            category: "ゲーム知識",
-            question: "「ブルーセンチネル」を倒すと回復するのは？",
+            question: "コントロールワードの特徴は？",
             image: null,
-            answers: ["体力", "マナ", "シールド", "ウルトのCD"],
-            correct: 1
-        },
-        {
-            category: "ゲーム知識",
-            question: "「レッドブランブルバック」を倒すと付与されるバフの効果は？",
-            image: null,
-            answers: ["マナ回復とCDR", "HP回復と通常攻撃へのスロー/TrueDmg付与", "移動速度増加", "タワーへのダメージ増加"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "カサディンの娘であるヴォイドの射手は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Kaisa.png",
-            answers: ["カリスタ", "カイ=サ", "ヴェイン", "アッシュ"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "デマーシアの翼と呼ばれる、クインの相棒の鳥の名前は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Quinn.png",
-            answers: ["ヴァラー", "スカイ", "ビート", "ウィング"],
-            correct: 0
-        },
-        {
-            category: "チャンピオン",
-            question: "自爆して敵にダメージを与えることができるケミテックの怪物は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/KogMaw.png",
-            answers: ["トゥイッチ", "コグマウ", "ザック", "ドクター・ムンド"],
+            answers: ["時間で消える", "敵ワードを見つけられる", "移動できる", "無料で買える"],
             correct: 1
         },
         {
             category: "アイテム",
-            question: "物理攻撃を防ぐのに適した「アーマー」を上げる基本アイテムは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/1029.png",
-            answers: ["ヌルマジックマント", "クロスアーマー", "チェインベスト", "ルビークリスタル"],
+            question: "攻撃力（AD）を上げる基本アイテムの名前は？",
+            image: null,
+            answers: ["増魔の書", "ロングソード", "ルビークリスタル", "ダガー"],
             correct: 1
         },
         {
-            category: "チャンピオン",
-            question: "ランタンを持ち魂を集めるシャドウアイルの看守は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Thresh.png",
-            answers: ["カーサス", "スレッシュ", "ヨリック", "ヘカリム"],
+            category: "アイテム",
+            question: "魔力（AP）を上げる基本アイテムの名前は？",
+            image: null,
+            answers: ["増魔の書", "ロングソード", "ルビークリスタル", "ダガー"],
+            correct: 0
+        },
+        // === サモナースペル ===
+        {
+            category: "サモナースペル",
+            question: "短距離をテレポートするサモナースペルは？",
+            image: null,
+            answers: ["テレポート", "フラッシュ", "ゴースト", "クレンズ"],
             correct: 1
         },
         {
-            category: "チャンピオン",
-            question: "四本の腕で踊るように戦うアイオニアの刃の舞い手は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Irelia.png",
-            answers: ["カルマ", "イレリア", "カミール", "リヴェン"],
-            correct: 1
+            category: "サモナースペル",
+            question: "モンスターに大ダメージを与えるジャングラー必須のスペルは？",
+            image: null,
+            answers: ["イグナイト", "エキゾースト", "スマイト", "バリア"],
+            correct: 2
         },
         {
-            category: "ゲーム知識",
+            category: "サモナースペル",
+            question: "敵に継続ダメージを与え、回復を減少させるスペルは？",
+            image: null,
+            answers: ["イグナイト", "エキゾースト", "スマイト", "バリア"],
+            correct: 0
+        },
+        // === 基本メカニクス ===
+        {
+            category: "メカニクス",
             question: "「エース！」のアナウンスが流れるのはどういう時？",
             image: null,
-            answers: ["一人が5連続キルした時", "敵チーム全員がデス状態になった時", "タワーを全て破壊した時", "バロンを倒した時"],
+            answers: ["一人が5連続キルした時", "敵チーム全員がデス状態の時", "タワーを全て破壊した時", "バロンを倒した時"],
             correct: 1
+        },
+        {
+            category: "メカニクス",
+            question: "敵をキルした後、自分もデスすることを何という？",
+            image: null,
+            answers: ["ダブルキル", "トレード", "1:1交換", "フィード"],
+            correct: 2
+        },
+        {
+            category: "メカニクス",
+            question: "敵を倒さずに死に続けることを何という？",
+            image: null,
+            answers: ["キャリー", "フィード", "ロームGive", "プッシュ"],
+            correct: 1
+        },
+        {
+            category: "メカニクス",
+            question: "自分のレーンを離れて他のレーンを助けに行くことを何という？",
+            image: null,
+            answers: ["プッシュ", "ローム", "リコール", "ガンク"],
+            correct: 1
+        },
+        {
+            category: "メカニクス",
+            question: "ジャングラーがレーンに来て敵を攻撃することを何という？",
+            image: null,
+            answers: ["プッシュ", "ローム", "リコール", "ガンク"],
+            correct: 3
+        },
+        {
+            category: "メカニクス",
+            question: "ベースに戻るためのキー（デフォルト）は？",
+            image: null,
+            answers: ["Q", "E", "B", "R"],
+            correct: 2
+        },
+        // === ジャングル基本 ===
+        {
+            category: "ジャングル",
+            question: "青バフ（ブルーセンチネル）を倒すと得られる主な効果は？",
+            image: null,
+            answers: ["攻撃力上昇", "マナ/エナジー回復", "移動速度上昇", "体力回復"],
+            correct: 1
+        },
+        {
+            category: "ジャングル",
+            question: "赤バフ（レッドブランブルバック）を倒すと得られる主な効果は？",
+            image: null,
+            answers: ["攻撃力上昇", "マナ回復", "スロー付与と体力回復", "移動速度上昇"],
+            correct: 2
+        },
+        {
+            category: "ジャングル",
+            question: "川にいるカニ（スカトルクラブ）を倒すと何ができる？",
+            image: null,
+            answers: ["バフ獲得", "視界確保と移動速度上昇ゾーン", "ゴールドボーナス", "経験値2倍"],
+            correct: 1
+        },
+        // === その他基本 ===
+        {
+            category: "その他",
+            question: "味方のキルに貢献したときに得られるのは？",
+            image: null,
+            answers: ["キル", "アシスト", "CS", "オブジェクト"],
+            correct: 1
+        },
+        {
+            category: "その他",
+            question: "レベルが上がると使えるようになるウルトスキルのキー（デフォルト）は？",
+            image: null,
+            answers: ["Q", "W", "E", "R"],
+            correct: 3
         }
     ],
 
-    // スタンダード向け問題（中級知識）- 50問
+    // スタンダード向け問題（中級知識）- 34問
     standard: [
+        // === オブジェクト詳細 ===
         {
-            category: "スキル",
-            question: "ヤスオのウルト「ラストブレス」を発動するために必要な条件は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Yasuo.png",
-            answers: ["敵がスタン状態", "敵がエアボーン状態", "自分のHPが50%以下", "風の壁が展開中"],
-            correct: 1
-        },
-        {
-            category: "アイテム",
-            question: "「ゾーニャの砂時計」のアクティブ効果は何秒間続く？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3157.png",
-            answers: ["1.5秒", "2秒", "2.5秒", "3秒"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン",
-            question: "イレリアのパッシブスキルでスタックが最大になるのは何スタック？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Irelia.png",
-            answers: ["3スタック", "4スタック", "5スタック", "6スタック"],
-            correct: 2
-        },
-        {
-            category: "ゲーム知識",
+            category: "オブジェクト",
             question: "ドラゴンソウルを獲得するために必要なドラゴンの討伐数は？",
             image: null,
             answers: ["3体", "4体", "5体", "6体"],
             correct: 1
         },
         {
-            category: "アイテム",
-            question: "「イモータルシールドボウ」はどのようなときにシールドが発動する？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/6673.png",
-            answers: ["5秒ごと", "HPが30%以下になったとき", "クリティカルヒット時", "敵をキルしたとき"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "セトのWスキル「ヘイメイカー」のダメージは何を基準に計算される？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Sett.png",
-            answers: ["攻撃力", "最大HP", "蓄積されたグリットの量", "防御力"],
-            correct: 2
-        },
-        {
-            category: "スキル",
-            question: "カ=ジックスが孤立した敵へのダメージを増加させるのはどのスキル？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Khazix.png",
-            answers: ["パッシブ", "Q", "W", "E"],
-            correct: 1
-        },
-        {
-            category: "ゲーム知識",
+            category: "オブジェクト",
             question: "バロンナッシャーが出現するのはゲーム開始から何分後？",
             image: null,
             answers: ["15分", "20分", "25分", "30分"],
             correct: 1
         },
         {
-            category: "チャンピオン",
-            question: "リヴェンが「ブレードオブザエグザイル」を発動すると何が変わる？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Riven.png",
-            answers: ["移動速度が上がる", "剣が大きくなり攻撃範囲とADが増加", "HPが回復する", "スキルのクールダウンが短縮"],
-            correct: 1
-        },
-        {
-            category: "アイテム",
-            question: "「ガーディアンエンジェル」の復活効果のクールダウンは何秒？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3026.png",
-            answers: ["180秒", "240秒", "300秒", "360秒"],
-            correct: 2
-        },
-        {
-            category: "スキル",
-            question: "シンドラのウルト「アンリーシュドパワー」のダメージは何に依存する？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Syndra.png",
-            answers: ["敵の失ったHP", "自分のマナ量", "フィールド上の球体の数", "スタックしたパッシブ"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン",
-            question: "アカリのパッシブ「暗殺の極意」発動のために必要なことは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Akali.png",
-            answers: ["スキルを当てた後リングの外に出る", "ブッシュに隠れる", "敵の背後から攻撃", "3回連続で通常攻撃"],
-            correct: 0
-        },
-        {
-            category: "ゲーム知識",
-            question: "タワープレートは1つ壊すといくらのゴールドがもらえる？",
+            category: "オブジェクト",
+            question: "リフトヘラルドが出現するのはゲーム開始から何分後？",
             image: null,
-            answers: ["120G", "160G", "175G", "200G"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "ベイガーのパッシブで魔力を獲得する条件は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Veigar.png",
-            answers: ["敵をキルした時", "スキルを敵に当てた時", "CSを取った時", "ミニオンが死んだ時"],
-            correct: 1
-        },
-        {
-            category: "スキル",
-            question: "フィズのEスキル「トリックスター」中は何が起こる？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Fizz.png",
-            answers: ["敵を挑発する", "ターゲット不可状態になる", "移動速度が200%増加", "次の攻撃がクリティカル"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "スレッシュのQスキル「デスセンテンス」の最大射程は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Thresh.png",
-            answers: ["900", "1000", "1100", "1200"],
-            correct: 2
-        },
-        {
-            category: "アイテム",
-            question: "「トリニティフォース」を構成する3つのアイテムに含まれないものは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3078.png",
-            answers: ["ヒールザ", "シーン", "ゼファー", "スティンガー"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン",
-            question: "キンドレッドのマークを集めるとどのような効果がある？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Kindred.png",
-            answers: ["攻撃力が上がる", "スキルの射程と追加ダメージが増加", "移動速度が上がる", "クールダウンが短縮される"],
-            correct: 1
-        },
-        {
-            category: "スキル",
-            question: "ルブランのRスキル「ミミック」は何をコピーできる？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Leblanc.png",
-            answers: ["敵のスキル", "直前に使った自分のスキル", "味方のスキル", "サモナースペル"],
-            correct: 1
-        },
-        {
-            category: "ゲーム知識",
-            question: "リフトヘラルドが出現するのは何分から？",
-            image: null,
-            answers: ["6分", "8分", "10分", "12分"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "エズリアルのQスキル「ミスティックショット」が当たるとどうなる？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Ezreal.png",
-            answers: ["マナが回復する", "全スキルのCDが1.5秒短縮", "攻撃速度が上がる", "移動速度が上がる"],
-            correct: 1
-        },
-        {
-            category: "アイテム",
-            question: "「ナッシャー・トゥース」が与える追加オンヒットダメージの種類は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3115.png",
-            answers: ["物理ダメージ", "魔法ダメージ", "確定ダメージ", "混合ダメージ"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "ケイン（シャドウアサシン）の特徴は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Kayn.png",
-            answers: ["CCが強い", "壁を通り抜けられる", "回復力が高い", "シールドが厚い"],
-            correct: 1
-        },
-        {
-            category: "スキル",
-            question: "ビクターのEスキル「デスレイ」のアップグレード効果は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Viktor.png",
-            answers: ["射程が伸びる", "爆発が起こる", "スローを付与する", "クールダウンが短縮"],
-            correct: 1
-        },
-        {
-            category: "ゲーム知識",
-            question: "スマイトのベースダメージはいくつ？",
-            image: null,
-            answers: ["450", "600", "750", "900"],
+            answers: ["6分", "8分", "10分", "14分"],
             correct: 3
         },
         {
-            category: "チャンピオン",
-            question: "ウーコンのパッシブ「石の肌」の効果は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/MonkeyKing.png",
-            answers: ["近くの敵チャンピオンごとにアーマーが増加", "ダメージを受けると回復", "攻撃速度が上がる", "クリティカル率が上がる"],
-            correct: 0
-        },
-        {
-            category: "アイテム",
-            question: "「デッドマンプレート」のパッシブで貯まるスタックの名前は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3742.png",
-            answers: ["フューリー", "モーメンタム", "チャージ", "スタックス"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "カシオペアがブーツを購入できない理由は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Cassiopeia.png",
-            answers: ["魔女の呪い", "足がない（蛇の尾）", "特殊なパッシブ", "バグ"],
-            correct: 1
-        },
-        {
-            category: "スキル",
-            question: "カイ=サのスキルがアップグレードされる条件は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Kaisa.png",
-            answers: ["レベルアップ", "特定のステータスが一定値に達する", "キル/アシストを取る", "時間経過"],
-            correct: 1
-        },
-        {
-            category: "ゲーム知識",
-            question: "タワープレートが消滅するのは何分？",
-            image: null,
-            answers: ["12分", "14分", "16分", "18分"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "アフェリオスが使える武器の種類は何種類？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Aphelios.png",
-            answers: ["3種類", "4種類", "5種類", "6種類"],
-            correct: 2
-        },
-        {
-            category: "アイテム",
-            question: "「メジャイの殺戮剣」の最大スタック数は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3041.png",
-            answers: ["15", "20", "25", "30"],
-            correct: 2
-        },
-        {
-            category: "スキル",
-            question: "オーンは何ができる固有のパッシブを持っている？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Ornn.png",
-            answers: ["どこでもアイテムを購入・製作できる", "タワーを回復できる", "味方のステータスを上げる", "敵のアイテムを破壊する"],
-            correct: 0
-        },
-        {
-            category: "チャンピオン",
-            question: "パイクのウルトで敵をキルすると何が起こる？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Pyke.png",
-            answers: ["HPが回復する", "アシストした味方もフルゴールドを得る", "移動速度が上がる", "ウルトがリセットされる"],
-            correct: 1
-        },
-        {
-            category: "ゲーム知識",
+            category: "オブジェクト",
             question: "エルダードラゴンが出現する条件は？",
             image: null,
-            answers: ["30分経過", "どちらかがドラゴンソウルを取得", "バロンが倒された", "6体目のドラゴン"],
-            correct: 1
-        },
-        {
-            category: "ゲーム知識",
-            question: "バロンバフ（ハンド・オブ・バロン）の継続時間は？",
-            image: null,
-            answers: ["120秒", "180秒", "210秒", "240秒"],
+            answers: ["30分経過", "どちらかがドラゴンソウルを取得", "バロンが倒された後", "6体目のドラゴン"],
             correct: 1
         },
         {
             category: "オブジェクト",
-            question: "リフトヘラルドの背中の目（弱点）を攻撃すると与えるダメージの種類は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/profileicon/3588.png",
-            answers: ["物理ダメージ", "魔法ダメージ", "確定ダメージ（True Damage）", "割合ダメージ"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン",
-            question: "アーケイン設定で、ジンクスの姉妹とされるチャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Jinx.png",
-            answers: ["ケイトリン", "ヴァイ", "エコー", "エズリアル"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "ヴェルコズのパッシブ、3スタック溜まると与えるダメージの種類は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Velkoz.png",
-            answers: ["物理ダメージ", "魔法ダメージ", "確定ダメージ", "混合ダメージ"],
-            correct: 2
-        },
-        {
-            category: "アイテム",
-            question: "「ドランリング」が提供するステータスに含まれないものは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/1056.png",
-            answers: ["魔力", "体力", "モンスターへの追加ダメージ", "オムニヴァンプ"],
-            correct: 3
-        },
-        {
-            category: "スキル",
-            question: "ティーモのキノコ（R）を無効化して見えるようにするアイテム/トリンケットは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Teemo.png",
-            answers: ["ファーサイトオルタレーション", "オラクルレンズ", "ワードトーテム", "スクライヤーブルーム"],
-            correct: 1
-        },
-        {
-            category: "ゲーム知識",
-            question: "カニ（リフトスカトル）を倒すと出現する「スピードシュライン」の効果は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/profileicon/3509.png",
-            answers: ["近くの味方のHP回復", "視界確保と通過する味方の移動速度アップ", "敵の移動速度ダウン", "ゴールドをばら撒く"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "「ヨードルの主将」と呼ばれ、シールドやノックバックを使う小柄な戦士は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Poppy.png",
-            answers: ["トリスターナ", "ポッピー", "ルル", "ベックス"],
-            correct: 1
-        },
-        {
-            category: "チャンピオン",
-            question: "「死を歌う者」と呼ばれ、グローバルウルトを持つチャンピオンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Karthus.png",
-            answers: ["スレッシュ", "サイオン", "カーサス", "ヨリック"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン",
-            question: "自身を「美」の具現化と信じているナルシストな射手は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Jhin.png",
-            answers: ["ドレイヴン", "ジン", "ヴァルス", "アフェリオス"],
-            correct: 1
-        },
-        {
-            category: "アイテム",
-            question: "「マナムネ」が最大スタック（360マナ）に達すると進化するアイテム名は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3004.png",
-            answers: ["セラフ・エンブレイス", "ウィンター・アプローチ", "ムラマナ", "フィンブルウィンター"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン",
-            question: "「嵐の怒り」ジャンナのEスキルは味方やタワーに何を付与する？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Janna.png",
-            answers: ["移動速度増加", "攻撃速度増加", "シールドと攻撃力増加", "HP回復"],
-            correct: 2
-        },
-        {
-            category: "スキル",
-            question: "ブリッツクランクのQスキル「ロケットグラブ」が当たるとどうなる？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Blitzcrank.png",
-            answers: ["敵をスローにする", "敵を自分の位置まで引き寄せる", "敵を空中に打ち上げる", "敵をスタンさせる"],
-            correct: 1
-        },
-        {
-            category: "ゲーム知識",
-            question: "インヒビターを破壊すると何が出現するようになる？",
+            question: "バロンバフ（ハンド・オブ・バロン）の継続時間は？",
             image: null,
-            answers: ["砲台ミニオン", "スーパーミニオン", "バロンナッシャー", "強化タワー"],
+            answers: ["2分", "3分", "4分", "5分"],
             correct: 1
         },
         {
-            category: "チャンピオン",
-            question: "ルーンテラの雷神とも呼ばれる、巨大な白熊の半神は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Volibear.png",
-            answers: ["オーン", "アニビア", "ボリベア", "ウディア"],
-            correct: 2
-        }
-    ],
-
-    // プロ向け問題（上級知識）- 50問
-    pro: [
-        {
-            category: "スキル詳細",
-            question: "ゼドの「死の刻印」で追加ダメージとして計算されるのはデスマーク中の総ダメージの何%？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Zed.png",
-            answers: ["25%", "35%", "45%", "55%"],
-            correct: 3
+            category: "オブジェクト",
+            question: "リフトヘラルドは最大で何回出現する？",
+            image: null,
+            answers: ["1回", "2回", "3回", "無制限"],
+            correct: 1
         },
         {
-            category: "ゲームメカニクス",
+            category: "オブジェクト",
+            question: "インヒビターが復活するまでの時間は？",
+            image: null,
+            answers: ["3分", "4分", "5分", "6分"],
+            correct: 2
+        },
+        {
+            category: "オブジェクト",
+            question: "タワープレートが消滅するのはゲーム開始から何分後？",
+            image: null,
+            answers: ["10分", "12分", "14分", "16分"],
+            correct: 2
+        },
+        {
+            category: "オブジェクト",
+            question: "タワープレートは全部で何枚ある？",
+            image: null,
+            answers: ["3枚", "4枚", "5枚", "6枚"],
+            correct: 2
+        },
+        {
+            category: "オブジェクト",
+            question: "タワープレート1枚を壊すともらえるゴールドは？",
+            image: null,
+            answers: ["120G", "160G", "175G", "200G"],
+            correct: 1
+        },
+        // === ドラゴンの種類 ===
+        {
+            category: "ドラゴン",
+            question: "インファーナルドラゴンのソウル効果は？",
+            image: null,
+            answers: ["移動速度上昇", "HP/マナ回復", "周期的な爆発ダメージ", "シールド獲得"],
+            correct: 2
+        },
+        {
+            category: "ドラゴン",
+            question: "マウンテンドラゴンのソウル効果は？",
+            image: null,
+            answers: ["攻撃力上昇", "シールド獲得", "回復力上昇", "移動速度上昇"],
+            correct: 1
+        },
+        {
+            category: "ドラゴン",
+            question: "オーシャンドラゴンのソウル効果は？",
+            image: null,
+            answers: ["ダメージ上昇", "回復効果", "移動速度上昇", "クールダウン短縮"],
+            correct: 1
+        },
+        {
+            category: "ドラゴン",
+            question: "クラウドドラゴンのソウル効果は？",
+            image: null,
+            answers: ["ダメージ上昇", "回復効果", "ウルト後の移動速度上昇", "シールド獲得"],
+            correct: 2
+        },
+        // === ゲームメカニクス詳細 ===
+        {
+            category: "メカニクス",
             question: "テナシティで軽減できないCCはどれ？",
             image: null,
             answers: ["スタン", "スロー", "サプレッション", "ルート"],
             correct: 2
         },
         {
-            category: "アイテム詳細",
-            question: "「ランデュイン・オーメン」のアクティブ効果で敵の攻撃速度を何%低下させる？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3143.png",
-            answers: ["10%", "15%", "20%", "25%"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン詳細",
-            question: "アジールの兵士の攻撃は何に基づいてダメージを与える？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Azir.png",
-            answers: ["通常攻撃として計算", "スキルダメージとして計算", "魔法ダメージだがオンヒット効果は適用", "全て確定ダメージ"],
-            correct: 2
-        },
-        {
-            category: "ゲームメカニクス",
-            question: "シールドを貫通してダメージを与えることができる効果は？",
+            category: "メカニクス",
+            question: "「グリーヴァスウーンド」の効果は？",
             image: null,
-            answers: ["アーマー貫通", "確定ダメージ", "脅威", "どれも貫通しない"],
-            correct: 3
-        },
-        {
-            category: "スキル詳細",
-            question: "ケイトリンのヘッドショットは基本攻撃に何%の追加ダメージを与える（レベル1時）？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Caitlyn.png",
-            answers: ["50%", "60%", "75%", "100%"],
+            answers: ["アーマー低下", "回復効果減少", "移動速度低下", "攻撃速度低下"],
             correct: 1
         },
         {
-            category: "ゲームメカニクス",
-            question: "「適応型フォース」はADとAPのどちらに変換されるかを何で決定する？",
+            category: "メカニクス",
+            question: "「テナシティ」の効果は？",
             image: null,
-            answers: ["チャンピオンのベースステータス", "購入したアイテムのステータス比率", "スキルのADレシオとAPレシオの高い方", "プレイヤーが選択"],
+            answers: ["ダメージ軽減", "CC時間短縮", "移動速度上昇", "クールダウン短縮"],
             correct: 1
         },
         {
-            category: "チャンピオン詳細",
-            question: "ヴェインのシルバーボルトは3発目の攻撃で敵最大HPの何%（最大レベル時）の確定ダメージを与える？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Vayne.png",
-            answers: ["8%", "10%", "12%", "14%"],
-            correct: 3
-        },
-        {
-            category: "アイテム詳細",
-            question: "「ブラッククリーバー」のアーマー減少効果は最大何%まで累積する？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3071.png",
-            answers: ["18%", "24%", "30%", "36%"],
-            correct: 2
-        },
-        {
-            category: "スキル詳細",
-            question: "カタリナのショアポ（E）のクールダウンがリセットされる条件は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Katarina.png",
-            answers: ["敵チャンピオンをキル", "ダガーを拾う", "キルまたはアシスト", "短剣に触れるか、キル/アシストを取る"],
-            correct: 3
-        },
-        {
-            category: "ゲームメカニクス",
-            question: "エルダードラゴンのバフ効果で敵を処刑できるのはHPが何%以下のとき？",
+            category: "メカニクス",
+            question: "敵の「アーマー」を無視してダメージを与えるステータスは？",
             image: null,
-            answers: ["10%", "15%", "20%", "25%"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン詳細",
-            question: "カミールのQスキル「プレシジョンプロトコル」の2段目が確定ダメージになるのは1段目から何秒後？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Camille.png",
-            answers: ["1秒", "1.5秒", "2秒", "2.5秒"],
+            answers: ["魔法貫通", "物理貫通/脅威", "攻撃力", "クリティカル"],
             correct: 1
         },
         {
-            category: "アイテム詳細",
-            question: "「ナイトエッジ」のスペルシールドはチャネリングを開始してから何秒後に発動する？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3814.png",
-            answers: ["0.5秒", "1秒", "1.5秒", "2秒"],
-            correct: 2
-        },
-        {
-            category: "スキル詳細",
-            question: "タロンのパッシブ「ブレードエンド」は何スタックで発動する？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Talon.png",
-            answers: ["2スタック", "3スタック", "4スタック", "5スタック"],
-            correct: 1
-        },
-        {
-            category: "ゲームメカニクス",
-            question: "ワードのクールダウン時間を短縮できるステータスは？",
+            category: "メカニクス",
+            question: "敵の「魔法防御」を無視してダメージを与えるステータスは？",
             image: null,
-            answers: ["スキルヘイスト", "アイテムヘイスト", "どちらでも短縮可能", "どちらでも短縮不可"],
-            correct: 3
-        },
-        {
-            category: "チャンピオン詳細",
-            question: "キンドレッドのパッシブマークは敵チャンピオンにつくのはゲーム開始から何秒後？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Kindred.png",
-            answers: ["15秒", "25秒", "30秒", "45秒"],
-            correct: 1
-        },
-        {
-            category: "アイテム詳細",
-            question: "「マルモティウス・メイ」のシールドはどのくらいの時間持続する？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3156.png",
-            answers: ["3秒", "5秒", "8秒", "シールドが破壊されるまで"],
-            correct: 1
-        },
-        {
-            category: "スキル詳細",
-            question: "リー・シンの「共鳴撃」（Q）の2段目のダメージボーナスは敵の失ったHPの何%？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/LeeSin.png",
-            answers: ["4%", "6%", "8%", "10%"],
-            correct: 2
-        },
-        {
-            category: "ゲームメカニクス",
-            question: "アルカナエネルギー（ブルーバフ）のマナ回復量は失ったマナの何%/秒？",
-            image: null,
-            answers: ["1%", "1.5%", "2%", "2.5%"],
+            answers: ["魔法貫通", "物理貫通", "攻撃力", "魔力"],
             correct: 0
         },
         {
-            category: "チャンピオン詳細",
-            question: "ジャックスのウルト「グランドマスター・アット・アームズ」のパッシブで3回目のAAが与える追加ダメージの種類は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Jax.png",
-            answers: ["物理ダメージ", "魔法ダメージ", "確定ダメージ", "混合ダメージ"],
-            correct: 1
-        },
-        {
-            category: "スキル詳細",
-            question: "グレイブスのAAには何発のペレットが含まれる？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Graves.png",
-            answers: ["2発", "4発", "6発", "8発"],
-            correct: 1
-        },
-        {
-            category: "ゲームメカニクス",
-            question: "トリンケットが使用可能になるのは何秒後？",
+            category: "メカニクス",
+            question: "「確定ダメージ（True Damage）」の特徴は？",
             image: null,
-            answers: ["60秒", "90秒", "120秒", "180秒"],
+            answers: ["クリティカルする", "アーマー/魔法防御を無視する", "回復効果がある", "範囲攻撃になる"],
             correct: 1
         },
+        // === アイテム詳細 ===
         {
-            category: "アイテム詳細",
-            question: "「サンファイアイージス」の燃焼ダメージはどのような計算？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3068.png",
-            answers: ["固定値", "最大HP基準", "敵最大HP基準", "レベル基準"],
-            correct: 3
-        },
-        {
-            category: "チャンピオン詳細",
-            question: "フィオラのウルト「グランドチャレンジ」で全ての急所を攻撃すると何が出現する？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Fiora.png",
-            answers: ["バリア", "回復エリア", "移動速度増加エリア", "攻撃力増加"],
-            correct: 1
-        },
-        {
-            category: "スキル詳細",
-            question: "アーリのチャームのCC時間は（ランク1で）何秒？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Ahri.png",
-            answers: ["1秒", "1.2秒", "1.4秒", "1.6秒"],
-            correct: 2
-        },
-        {
-            category: "ゲームメカニクス",
-            question: "クリティカルダメージの基本倍率は何%？",
+            category: "アイテム",
+            question: "「ゾーニャの砂時計」のアクティブ効果は何秒間続く？",
             image: null,
-            answers: ["150%", "175%", "200%", "225%"],
-            correct: 1
-        },
-        {
-            category: "アイテム詳細",
-            question: "「ソーンメイル」の棘の反射ダメージが増加する条件は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3075.png",
-            answers: ["HPが低いとき", "CC中の敵から攻撃を受けた時", "自分がCCを与えた時", "敵のクリティカル攻撃を受けた時"],
+            answers: ["1.5秒", "2秒", "2.5秒", "3秒"],
             correct: 2
         },
         {
-            category: "チャンピオン詳細",
-            question: "レンガーのパッシブ「ウンサーノフ」のジャンプ距離は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Rengar.png",
-            answers: ["600", "725", "800", "900"],
-            correct: 1
-        },
-        {
-            category: "スキル詳細",
-            question: "ヴェインのEスキル「コンデム」で壁に押し付けた時のスタン時間は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Vayne.png",
-            answers: ["1秒", "1.25秒", "1.5秒", "1.75秒"],
-            correct: 2
-        },
-        {
-            category: "ゲームメカニクス",
-            question: "イグナイトの確定ダメージは5秒間で合計いくら（レベル1）？",
-            image: null,
-            answers: ["50", "70", "90", "110"],
-            correct: 1
-        },
-        {
-            category: "アイテム詳細",
-            question: "「ルーデンテンペスト」のパッシブクールダウンは？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3100.png",
-            answers: ["6秒", "8秒", "10秒", "12秒"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン詳細",
-            question: "エコーのパッシブ「Zドライブ共鳴」は3スタックで敵に何を与える？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Ekko.png",
-            answers: ["スロー", "スタン", "追加ダメージと移動速度増加", "サイレンス"],
-            correct: 2
-        },
-        {
-            category: "スキル詳細",
-            question: "ドレイヴンのスタンディングアサイドのノックアサイド距離は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Draven.png",
-            answers: ["100", "150", "200", "250"],
-            correct: 1
-        },
-        {
-            category: "ゲームメカニクス",
-            question: "クールダウン短縮（CDR）の上限は何%？",
-            image: null,
-            answers: ["30%", "35%", "40%", "上限なし（ヘイストに変換）"],
-            correct: 3
-        },
-        {
-            category: "アイテム詳細",
-            question: "「リーライ・クリスタルセプター」のスロー効果は何%？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3116.png",
-            answers: ["20%", "25%", "30%", "35%"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン詳細",
-            question: "サイラスのウルト「ハイジャック」のベースクールダウン（ランク1）は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Sylas.png",
-            answers: ["80秒", "90秒", "100秒", "120秒"],
-            correct: 2
-        },
-        {
-            category: "スキル詳細",
-            question: "オリアナのQスキル「コマンド：アタック」でボールが移動する速度は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Orianna.png",
-            answers: ["1000", "1200", "1400", "1600"],
-            correct: 1
-        },
-        {
-            category: "ゲームメカニクス",
-            question: "最初のドラゴンが出現するのは何分？",
+            category: "アイテム",
+            question: "「ガーディアンエンジェル」の復活効果のクールダウンは？",
             image: null,
             answers: ["3分", "4分", "5分", "6分"],
             correct: 2
         },
         {
-            category: "アイテム詳細",
-            question: "「ストームレイダー」のパッシブが発動するダメージ閾値は？",
+            category: "アイテム",
+            question: "「エリクサー」を使用できるようになるレベルは？",
             image: null,
-            answers: ["2秒以内に最大HP25%", "2秒以内に最大HP30%", "3秒以内に最大HP25%", "3秒以内に最大HP30%"],
+            answers: ["レベル6", "レベル9", "レベル11", "レベル13"],
+            correct: 1
+        },
+        // === ワーディング ===
+        {
+            category: "ワード",
+            question: "ステルスワード（黄トリ）の持続時間は？",
+            image: null,
+            answers: ["60-120秒", "90-120秒", "90-180秒", "120-180秒"],
             correct: 1
         },
         {
-            category: "チャンピオン詳細",
-            question: "クレッドの「スカール」が逃げるのはHPが何以下になった時？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Kled.png",
-            answers: ["0", "スカールの体力ゲージを使い果たした", "クレッドのHP50%以下", "CC連続で受けた"],
+            category: "ワード",
+            question: "コントロールワードは同時に何個まで置ける？",
+            image: null,
+            answers: ["1個", "2個", "3個", "無制限"],
+            correct: 0
+        },
+        {
+            category: "ワード",
+            question: "オラクルレンズ（赤トリ）の効果は？",
+            image: null,
+            answers: ["ワードを置く", "敵ワードを発見・無効化", "広範囲を見る", "テレポートできる"],
             correct: 1
         },
+        // === 経験値・ゴールド ===
         {
-            category: "ゲームメカニクス",
-            question: "脅威（Lethality）と物理防御貫通の違いは？",
+            category: "経験値",
+            question: "ウルトスキル（R）が最初に使えるようになるレベルは？",
             image: null,
-            answers: ["違いはない", "脅威はレベル比例の実数値貫通、物理防御貫通は割合", "脅威は割合、物理防御貫通は実数値", "脅威はクリティカルにも適用される"],
-            correct: 1
+            answers: ["レベル4", "レベル5", "レベル6", "レベル7"],
+            correct: 2
         },
         {
-            category: "ゲームメカニクス",
-            question: "ゲーム内で設定できる攻撃速度（Attack Speed）の通常の上限は？",
+            category: "経験値",
+            question: "最高レベルは？",
             image: null,
-            answers: ["2.0", "2.25", "2.5", "3.0"],
-            correct: 2
-        },
-        {
-            category: "スキル詳細",
-            question: "サモナースペル「クレンズ」で解除できない状態異常は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/spell/SummonerBoost.png",
-            answers: ["スタンとスネア", "サイレンスとスロー", "ノックアップとサプレッション", "ブラインドとチャーム"],
-            correct: 2
-        },
-        {
-            category: "ゲームメカニクス",
-            question: "タワーがゲーム開始から5分間持つ「要塞化」バフの効果で、受けるダメージは何%減少する？",
-            image: null,
-            answers: ["30%", "40%", "50%", "60%"],
-            correct: 2
-        },
-        {
-            category: "アイテム詳細",
-            question: "「ラバドン・デスキャップ」のパッシブ効果で増加する魔力は何%？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3089.png",
-            answers: ["30%", "35%", "40%", "45%"],
-            correct: 1
-        },
-        {
-            category: "スキル詳細",
-            question: "モルデカイザーのR「死の国」で奪うステータスの割合は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Mordekaiser.png",
-            answers: ["5%", "8%", "10%", "15%"],
-            correct: 2
-        },
-        {
-            category: "チャンピオン詳細",
-            question: "アニビアが卵状態（パッシブ）になる際の卵の耐久力（AR/MR）はレベルによってどう変化する？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Anivia.png",
-            answers: ["固定値", "変化しない", "レベルに応じて増加する", "レベルに応じて減少する"],
+            answers: ["15", "16", "17", "18"],
             correct: 3
         },
         {
-            category: "スキル詳細",
-            question: "カサディンのR「リフトウォーク」のスタック最大数は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/champion/Kassadin.png",
-            answers: ["3", "4", "5", "6"],
-            correct: 1
-        },
-        {
-            category: "ゲームメカニクス",
-            question: "ミニオンへのテレポート詠唱時間は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/spell/SummonerTeleport.png",
-            answers: ["3秒", "3.5秒", "4秒", "4.5秒"],
+            category: "ゴールド",
+            question: "敵チャンピオンをキルすると最低でももらえるゴールドは？",
+            image: null,
+            answers: ["150G", "200G", "300G", "400G"],
             correct: 2
         },
         {
-            category: "アイテム詳細",
-            question: "サポートアイテム「ウォッチフル・ワードストーン」が格納できるコントロールワードの最大数は？",
-            image: "https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/3158.png",
+            category: "ゴールド",
+            question: "ファーストブラッド（最初のキル）のボーナスゴールドは？",
+            image: null,
+            answers: ["50G", "100G", "150G", "200G"],
+            correct: 1
+        },
+        // === スマイトとジャングル ===
+        {
+            category: "ジャングル",
+            question: "スマイトのベースダメージはいくつ？",
+            image: null,
+            answers: ["450", "600", "720", "900"],
+            correct: 3
+        },
+        {
+            category: "ジャングル",
+            question: "赤スマイト（挑発のスマイト）の効果は？",
+            image: null,
+            answers: ["回復", "敵チャンピオンにダメージ", "移動速度上昇", "アーマー上昇"],
+            correct: 1
+        },
+        {
+            category: "ジャングル",
+            question: "青スマイト（冷静のスマイト）の効果は？",
+            image: null,
+            answers: ["ダメージとスロー", "回復", "シールド獲得", "クールダウン短縮"],
+            correct: 0
+        },
+        // === その他中級 ===
+        {
+            category: "その他",
+            question: "リコールにかかる時間（デフォルト）は？",
+            image: null,
+            answers: ["6秒", "7秒", "8秒", "10秒"],
+            correct: 2
+        }
+    ],
+
+    // プロ向け問題（上級知識）- 33問
+    pro: [
+        // === 詳細な数値・タイミング ===
+        {
+            category: "タイミング",
+            question: "最初のミニオンウェーブが衝突するのはゲーム開始から何秒後？",
+            image: null,
+            answers: ["1分5秒", "1分15秒", "1分25秒", "1分35秒"],
+            correct: 2
+        },
+        {
+            category: "タイミング",
+            question: "キャノンミニオンが出現し始めるのは何分から？",
+            image: null,
+            answers: ["すぐ", "2分10秒", "3分15秒", "5分"],
+            correct: 1
+        },
+        {
+            category: "タイミング",
+            question: "バロンを倒すと得られるゴールドは？",
+            image: null,
+            answers: ["200G", "300G", "400G", "500G"],
+            correct: 1
+        },
+        {
+            category: "タイミング",
+            question: "ドラゴンが倒された後、次のドラゴンが出現するまでの時間は？",
+            image: null,
+            answers: ["4分", "5分", "6分", "7分"],
+            correct: 1
+        },
+        // === 高度なメカニクス ===
+        {
+            category: "メカニクス",
+            question: "「エアボーン」状態の敵にのみ発動できるのは何のスキル？",
+            image: null,
+            answers: ["ゼドのR", "ヤスオのR", "リー・シンのR", "マルファイトのR"],
+            correct: 1
+        },
+        {
+            category: "メカニクス",
+            question: "「サプレッション」を解除できるアイテムは？",
+            image: null,
+            answers: ["水銀のサッシュ", "ゾーニャの砂時計", "クイックシルバーサッシュ", "ミカエルの祝福"],
+            correct: 2
+        },
+        {
+            category: "メカニクス",
+            question: "シールドを貫通できるダメージの種類は？",
+            image: null,
+            answers: ["確定ダメージ", "物理ダメージ", "魔法ダメージ", "どれも貫通しない"],
+            correct: 3
+        },
+        {
+            category: "メカニクス",
+            question: "「エグゼキューション」（処刑）効果を持つアイテムは？",
+            image: null,
+            answers: ["インフィニティエッジ", "コレクター", "ドミニクリガード", "モータルリマインダー"],
+            correct: 1
+        },
+        // === バフ・デバフ詳細 ===
+        {
+            category: "バフ",
+            question: "エルダードラゴンバフで敵を処刑できるのはHPが何%以下のとき？",
+            image: null,
+            answers: ["10%", "15%", "20%", "25%"],
+            correct: 2
+        },
+        {
+            category: "バフ",
+            question: "バロンバフで強化されるのは？",
+            image: null,
+            answers: ["チャンピオンのステータス", "近くのミニオン", "タワーへのダメージ", "全て"],
+            correct: 1
+        },
+        {
+            category: "バフ",
+            question: "リフトヘラルドの「目」（弱点）を攻撃すると与えるダメージは？",
+            image: null,
+            answers: ["固定500ダメージ", "現在HPの12%確定ダメージ", "最大HPの10%", "通常の2倍"],
+            correct: 1
+        },
+        // === ワーディング詳細 ===
+        {
+            category: "ワード",
+            question: "サポートアイテムがワードを置けるようになるのは何ゴールド獲得後？",
+            image: null,
+            answers: ["400G", "500G", "1000G", "1500G"],
+            correct: 1
+        },
+        {
+            category: "ワード",
+            question: "完成したサポートアイテムで同時に置けるワードの数は？",
+            image: null,
             answers: ["2個", "3個", "4個", "5個"],
+            correct: 2
+        },
+        {
+            category: "ワード",
+            question: "ゾンビワードを発生させるルーンは？",
+            image: null,
+            answers: ["ゴーストポロ", "ゾンビワード", "アイボールコレクション", "至高の狩人"],
+            correct: 1
+        },
+        // === タワー詳細 ===
+        {
+            category: "タワー",
+            question: "タワーダイブ時、タワーのダメージは攻撃ごとに何%増加する？",
+            image: null,
+            answers: ["20%", "25%", "30%", "40%"],
+            correct: 3
+        },
+        {
+            category: "タワー",
+            question: "Tier1タワー（最初のタワー）を壊すと得られるファーストブリックボーナスは？",
+            image: null,
+            answers: ["100G", "150G", "200G", "250G"],
+            correct: 1
+        },
+        // === オブジェクト詳細 ===
+        {
+            category: "オブジェクト",
+            question: "ヴォイドグラブ（Voidgrub）は最大で何体倒せる？",
+            image: null,
+            answers: ["3体", "4体", "5体", "6体"],
+            correct: 3
+        },
+        {
+            category: "オブジェクト",
+            question: "ヴォイドグラブを3体以上倒すと得られる効果は？",
+            image: null,
+            answers: ["ゴールドボーナス", "経験値ボーナス", "ヴォイドマイトが敵構造物を攻撃", "全員にシールド"],
+            correct: 2
+        },
+        {
+            category: "オブジェクト",
+            question: "アトゥクハン（Atakhan）が出現するのは何分後？",
+            image: null,
+            answers: ["15分", "20分", "25分", "30分"],
+            correct: 1
+        },
+        // === アイテム詳細 ===
+        {
+            category: "アイテム",
+            question: "「ブラッククリーバー」のアーマー減少効果は最大何%まで累積する？",
+            image: null,
+            answers: ["18%", "24%", "30%", "36%"],
+            correct: 2
+        },
+        {
+            category: "アイテム",
+            question: "クリティカル率が100%を超えた分はどうなる？",
+            image: null,
+            answers: ["無駄になる", "攻撃力に変換", "攻撃速度に変換", "ライフスティールに変換"],
+            correct: 0
+        },
+        {
+            category: "アイテム",
+            question: "「ナッシャートゥース」の追加オンヒットダメージの種類は？",
+            image: null,
+            answers: ["物理ダメージ", "魔法ダメージ", "確定ダメージ", "混合ダメージ"],
+            correct: 1
+        },
+        // === ルーン詳細 ===
+        {
+            category: "ルーン",
+            question: "「征服者」が最大スタックになるとどうなる？",
+            image: null,
+            answers: ["攻撃力上昇", "回復効果を得る", "移動速度上昇", "クールダウン短縮"],
+            correct: 1
+        },
+        {
+            category: "ルーン",
+            question: "「電撃」が発動する条件は？",
+            image: null,
+            answers: ["3回攻撃", "スキル命中", "3回の異なる攻撃/スキル", "クリティカル"],
+            correct: 2
+        },
+        {
+            category: "ルーン",
+            question: "「フリートフットワーク」の効果は？",
+            image: null,
+            answers: ["ダメージ上昇", "回復と移動速度上昇", "シールド獲得", "攻撃速度上昇"],
+            correct: 1
+        },
+        // === 高度なゲーム知識 ===
+        {
+            category: "知識",
+            question: "「ブーツ」を購入できないチャンピオンは？",
+            image: null,
+            answers: ["ヘカリム", "リリア", "カシオペア", "ケイン"],
+            correct: 2
+        },
+        {
+            category: "知識",
+            question: "味方タワーの範囲内で敵チャンピオンにダメージを与えると何が起こる？",
+            image: null,
+            answers: ["何も起こらない", "タワーがその敵を攻撃する", "自分がタワーに攻撃される", "ミニオンが集まる"],
+            correct: 1
+        },
+        {
+            category: "知識",
+            question: "シャットダウンゴールドが発生するのはキルストリークが何以上の時？",
+            image: null,
+            answers: ["2", "3", "4", "5"],
+            correct: 1
+        },
+        {
+            category: "知識",
+            question: "「アダプティブフォース」はADとAPのどちらに変換されるかを何で決定する？",
+            image: null,
+            answers: ["チャンピオンのベースステータス", "購入したアイテムのステータス比率", "スキルのスケーリング", "ルーン設定"],
+            correct: 1
+        },
+        // === 特殊メカニクス ===
+        {
+            category: "特殊",
+            question: "「ミニオンデマテリアライザー」の効果は？",
+            image: null,
+            answers: ["ミニオンを即死させ、そのタイプへのダメージ増加", "ミニオンを味方にする", "ミニオンの移動速度上昇", "ミニオンから追加ゴールド"],
+            correct: 0
+        },
+        {
+            category: "特殊",
+            question: "タワーが「フォーティファイ」状態になるとどうなる？",
+            image: null,
+            answers: ["破壊不可", "ダメージ軽減", "攻撃速度上昇", "回復開始"],
+            correct: 1
+        },
+        {
+            category: "特殊",
+            question: "「パッシブ」スキルの特徴は？",
+            image: null,
+            answers: ["キーを押して発動", "常に効果が発揮される", "ウルトと同じ", "味方にのみ効果"],
+            correct: 1
+        },
+        {
+            category: "特殊",
+            question: "「オムニヴァンプ」と「ライフスティール」の違いは？",
+            image: null,
+            answers: ["同じ効果", "オムニヴァンプは全ダメージから回復", "ライフスティールの方が回復量が多い", "オムニヴァンプはスキルのみ"],
             correct: 1
         }
     ]
@@ -1093,8 +769,8 @@ const QUIZ_CONFIG = {
 // 結果メッセージ
 const RESULT_MESSAGES = {
     perfect: "完璧！あなたは真のチャレンジャー！",
-    excellent: "素晴らしい！上位ランクの実力です！",
-    good: "よくできました！もう少しで上級者！",
-    average: "まずまずです。もっと勉強しよう！",
-    poor: "頑張りましょう！練習あるのみ！"
+    excellent: "素晴らしい！プロレベルの知識です！",
+    good: "よくできました！さらに上を目指そう！",
+    average: "まずまずの結果です。もう少し勉強しよう！",
+    poor: "もっと練習が必要です。頑張って！"
 };
