@@ -333,34 +333,56 @@ body::before {
 
 .volume-slider {
     flex: 1;
-    height: 6px;
+    height: 20px;
     -webkit-appearance: none;
     appearance: none;
-    background: var(--gold-5);
-    border-radius: 3px;
+    background: transparent;
     outline: none;
     cursor: pointer;
+    position: relative;
+}
+
+.volume-slider::-webkit-slider-runnable-track {
+    height: 8px;
+    background: var(--gold-5);
+    border-radius: 4px;
 }
 
 .volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
     background: linear-gradient(180deg, var(--gold-2) 0%, var(--gold-4) 100%);
     border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 0 8px var(--gold-3);
+    cursor: grab;
+    box-shadow: 0 0 8px var(--gold-3), 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin-top: -8px;
+}
+
+.volume-slider::-webkit-slider-thumb:active {
+    cursor: grabbing;
+    transform: scale(1.1);
+}
+
+.volume-slider::-moz-range-track {
+    height: 8px;
+    background: var(--gold-5);
+    border-radius: 4px;
 }
 
 .volume-slider::-moz-range-thumb {
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
     background: linear-gradient(180deg, var(--gold-2) 0%, var(--gold-4) 100%);
     border-radius: 50%;
-    cursor: pointer;
+    cursor: grab;
     border: none;
-    box-shadow: 0 0 8px var(--gold-3);
+    box-shadow: 0 0 8px var(--gold-3), 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.volume-slider::-moz-range-thumb:active {
+    cursor: grabbing;
 }
 
 .volume-value {
@@ -618,9 +640,9 @@ body::before {
 }
 
 .card-icon {
-    width: 400px;
-    height: 400px;
-    margin: 0 auto var(--spacing-xl);
+    width: 180px;
+    height: 180px;
+    margin: var(--spacing-xl) auto;
     display: flex;
     align-items: center;
     justify-content: center;
